@@ -3,19 +3,24 @@
 int main(){
 
     FILE *archivo=NULL;
-    char buffer[100];
-    double pi;
+    FILE *archivo2=NULL;
+    int a;
 
-    archivo=fopen("vector.txt","w");
-    
-    if (archivo==NULL){
+    archivo=fopen("vector.txt","r");
+    archivo2=fopen("vector2.txt","w");
+
+    if(archivo==NULL){
         printf("No se puede abrir el archivo");
         return -1;
     }
-
-    for(int i=0; i<100; i++){
-        fprintf(archivo,"%d\n",i);
+    while (!feof(archivo)){
+        fscanf(archivo,"%d", &a);
+        if(a%3==0){
+            fprintf(archivo2,"Multiplo de 3\n",a);
+        }else{
+            fprintf(archivo2,"%d\n",a);
+        }
     }
-     fclose(archivo);
-     return 0;
+    fclose(archivo);
+    fclose(archivo2);
 }
